@@ -1,0 +1,75 @@
+# work-dashboard example configuration
+#
+# Token handling:
+#   Tokens are read from environment variables using ${VAR} syntax.
+#   Set them in your shell before running, or pass them via docker compose:
+#
+#     export GITHUB_TOKEN=ghp_...
+#     export GHE_TOKEN=ghp_...
+#     docker compose up
+#
+#   Never commit real tokens to this file.
+
+instances:
+  - name: github
+    api_url: https://api.github.com
+    graphql_url: https://api.github.com/graphql
+    token: ${GITHUB_TOKEN}
+
+  - name: ghe
+    api_url: https://github.example.com/api/v3
+    graphql_url: https://github.example.com/api/graphql
+    token: ${GHE_TOKEN}
+
+defaults:
+  poll_interval: 5m
+
+db_path: /data/dashboard.db
+listen: :8080
+
+widgets:
+  - id: my-prs
+    type: pr_list
+    title: My Pull Requests
+    instance: github
+    refresh: 2m
+    filters:
+      author: "@me"
+      state: open
+
+  - id: prod-actions
+    type: workflow_status
+    title: Production Workflows
+    instance: github
+    refresh: 3m
+    repo: myorg/myrepo
+    workflow: deploy.yml
+
+  - id: build-pipeline
+    type: branch_matrix
+    title: Build Pipeline
+    instance: ghe
+    refresh: 5m
+    repos:
+      - myorg/service-a
+      - myorg/service-b
+    branches:
+      - main
+      - staging
+
+  - id: my-issues
+    type: my_issues
+    title: My Issues
+    instance: github
+    refresh: 5m
+    filters:
+      author: "@me"
+      state: open
+
+layout:
+  columns: 2
+  order:
+    - my-prs
+    - prod-actions
+    - build-pipeline
+    - my-issues

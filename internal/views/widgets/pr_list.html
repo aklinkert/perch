@@ -1,0 +1,24 @@
+{{define "pr_list.html"}}
+<div class="flex items-center justify-between mb-3">
+  <h2 class="font-semibold">{{.Title}}</h2>
+  <span class="text-xs text-gray-500">{{.Updated}}</span>
+</div>
+{{if .Error}}
+<div class="text-sm text-red-400">error: {{.Error}}</div>
+{{else if not .Items}}
+<div class="text-sm text-gray-500">no PRs</div>
+{{else}}
+<ul class="space-y-2">
+  {{range .Items}}
+  <li class="flex items-start gap-2 text-sm">
+    <span class="mt-1 inline-block w-2 h-2 rounded-full {{if eq .State "OPEN"}}bg-green-500{{else if eq .State "MERGED"}}bg-purple-500{{else}}bg-gray-500{{end}}"></span>
+    <div class="flex-1 min-w-0">
+      <a href="{{.URL}}" target="_blank" class="hover:underline truncate block">{{.Title}}</a>
+      <div class="text-xs text-gray-500">{{.Repo}} #{{.Number}} · {{.Author}}</div>
+    </div>
+    <span class="text-xs text-gray-500 shrink-0">{{.Updated}}</span>
+  </li>
+  {{end}}
+</ul>
+{{end}}
+{{end}}

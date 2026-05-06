@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Small colored badge used by widget templates to show PR/issue/run status */
+  .status-pill {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .status-pill-green {
+    @apply status-pill bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200;
+  }
+
+  .status-pill-red {
+    @apply status-pill bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200;
+  }
+
+  .status-pill-yellow {
+    @apply status-pill bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200;
+  }
+
+  .status-pill-gray {
+    @apply status-pill bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200;
+  }
+
+  .status-pill-blue {
+    @apply status-pill bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200;
+  }
+}

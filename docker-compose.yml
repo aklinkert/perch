@@ -1,0 +1,16 @@
+services:
+  dashboard:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GHE_TOKEN: ${GHE_TOKEN}
+    volumes:
+      - ./config.yaml:/etc/dashboard/config.yaml:ro
+      - dashboard-data:/data
+    restart: unless-stopped
+
+volumes:
+  dashboard-data:

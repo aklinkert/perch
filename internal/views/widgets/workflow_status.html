@@ -1,0 +1,29 @@
+{{define "workflow_status.html"}}
+<div class="flex items-center justify-between mb-3">
+  <h2 class="font-semibold">{{.Title}}</h2>
+  <span class="text-xs text-gray-500">{{.Updated}}</span>
+</div>
+{{if .Error}}
+<div class="text-sm text-red-400">error: {{.Error}}</div>
+{{else if not .Items}}
+<div class="text-sm text-gray-500">no runs</div>
+{{else}}
+<ul class="space-y-2">
+  {{range .Items}}
+  <li class="flex items-center gap-2 text-sm">
+    <span class="inline-block w-2 h-2 rounded-full
+      {{if eq .Conclusion "success"}}bg-green-500
+      {{else if eq .Conclusion "failure"}}bg-red-500
+      {{else if eq .Conclusion "cancelled"}}bg-gray-500
+      {{else if eq .Status "in_progress"}}bg-yellow-400
+      {{else if eq .Status "queued"}}bg-yellow-300
+      {{else}}bg-gray-400{{end}}"></span>
+    <a href="{{.URL}}" target="_blank" class="hover:underline flex-1 min-w-0 truncate">
+      #{{.RunNumber}} on {{.HeadBranch}}
+    </a>
+    <span class="text-xs text-gray-500 shrink-0">{{.CreatedAt}}</span>
+  </li>
+  {{end}}
+</ul>
+{{end}}
+{{end}}
