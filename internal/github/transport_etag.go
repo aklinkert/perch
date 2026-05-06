@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aklinkert/work-dashboard/internal/cache"
+	"github.com/aklinkert/perch/internal/cache"
 )
 
 type etagTransport struct {

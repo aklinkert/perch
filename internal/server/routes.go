@@ -9,8 +9,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 
-	"github.com/aklinkert/work-dashboard/internal/widget"
-	"github.com/aklinkert/work-dashboard/web"
+	"github.com/aklinkert/perch/internal/widget"
+	"github.com/aklinkert/perch/web"
 )
 
 type layoutWidget struct {

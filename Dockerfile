@@ -31,16 +31,16 @@ COPY --from=tailwind /app/web/static/app.css ./web/static/app.css
 RUN CGO_ENABLED=1 go build \
     -trimpath \
     -ldflags='-s -w' \
-    -o /out/dashboard \
-    ./cmd/dashboard
+    -o /out/perch \
+    ./cmd/perch
 
 # Stage 3: Runtime — distroless/cc for CGO (glibc-compatible)
 FROM gcr.io/distroless/cc-debian12:nonroot
 
-COPY --from=build /out/dashboard /dashboard
+COPY --from=build /out/perch /perch
 
 EXPOSE 8080
 
 VOLUME ["/data"]
 
-ENTRYPOINT ["/dashboard", "run", "--config", "/etc/dashboard/config.yaml"]
+ENTRYPOINT ["/perch", "run", "--config", "/etc/perch/config.yaml"]

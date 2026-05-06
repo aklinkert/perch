@@ -1,5 +1,5 @@
 services:
-  dashboard:
+  perch:
     build:
       context: .
     ports:
@@ -8,9 +8,9 @@ services:
       GITHUB_TOKEN: ${GITHUB_TOKEN}
       GHE_TOKEN: ${GHE_TOKEN}
     volumes:
-      - ./config.yaml:/etc/dashboard/config.yaml:ro
-      - dashboard-data:/data
+      - ./config.yaml:/etc/perch/config.yaml:ro
+      - perch-data:/data
     restart: unless-stopped
 
 volumes:
-  dashboard-data:
+  perch-data:

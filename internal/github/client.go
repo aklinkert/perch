@@ -8,8 +8,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/aklinkert/work-dashboard/internal/cache"
-	"github.com/aklinkert/work-dashboard/internal/config"
+	"github.com/aklinkert/perch/internal/cache"
+	"github.com/aklinkert/perch/internal/config"
 	gogithub "github.com/google/go-github/v66/github"
 	"github.com/shurcooL/githubv4"
 	"golang.org/x/oauth2"

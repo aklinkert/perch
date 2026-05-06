@@ -12,10 +12,10 @@ import (
 
 	gogithub "github.com/google/go-github/v66/github"
 
-	"github.com/aklinkert/work-dashboard/internal/cache"
-	"github.com/aklinkert/work-dashboard/internal/config"
-	"github.com/aklinkert/work-dashboard/internal/views"
-	"github.com/aklinkert/work-dashboard/internal/widget"
+	"github.com/aklinkert/perch/internal/cache"
+	"github.com/aklinkert/perch/internal/config"
+	"github.com/aklinkert/perch/internal/views"
+	"github.com/aklinkert/perch/internal/widget"
 )
 
 const widgetType = "workflow_status"

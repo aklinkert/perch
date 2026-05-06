@@ -8,8 +8,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 
-	"github.com/aklinkert/work-dashboard/internal/config"
-	"github.com/aklinkert/work-dashboard/internal/widget"
+	"github.com/aklinkert/perch/internal/config"
+	"github.com/aklinkert/perch/internal/widget"
 )
 
 // Server wraps a Fiber app together with the dependencies needed to render
@@ -27,7 +27,7 @@ type Server struct {
 // New constructs the server, registers routes, and returns it ready to Listen.
 func New(cfg *config.Config, tmpl *template.Template, bcast *widget.Broadcaster, widgets []widget.Widget) *Server {
 	app := fiber.New(fiber.Config{
-		AppName:               "work-dashboard",
+		AppName:               "perch",
 		DisableStartupMessage: true,
 		ReadTimeout:           30 * time.Second,
 		// Long-lived SSE streams need WriteTimeout disabled.

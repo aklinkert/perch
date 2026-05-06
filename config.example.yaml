@@ -1,4 +1,4 @@
-# work-dashboard example configuration
+# perch example configuration
 #
 # Token handling:
 #   Tokens are read from environment variables using ${VAR} syntax.
@@ -24,7 +24,7 @@ instances:
 defaults:
   poll_interval: 5m
 
-db_path: /data/dashboard.db
+db_path: /data/perch.db
 listen: :8080
 
 widgets:

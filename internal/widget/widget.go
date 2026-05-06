@@ -5,9 +5,9 @@ import (
 	"io"
 	"time"
 
-	"github.com/aklinkert/work-dashboard/internal/cache"
-	"github.com/aklinkert/work-dashboard/internal/config"
-	"github.com/aklinkert/work-dashboard/internal/github"
+	"github.com/aklinkert/perch/internal/cache"
+	"github.com/aklinkert/perch/internal/config"
+	"github.com/aklinkert/perch/internal/github"
 )
 
 type Widget interface {

@@ -1,4 +1,4 @@
-module github.com/aklinkert/work-dashboard
+module github.com/aklinkert/perch
 
 go 1.26.1
 

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aklinkert/work-dashboard/internal/views"
+	"github.com/aklinkert/perch/internal/views"
 )
 
 func TestRender(t *testing.T) {

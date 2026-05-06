@@ -1,10 +1,10 @@
 ---
 name: agent-team-workflow
-description: For multi-file/layer implementation tasks in work-dashboard, spawn parallel sub-agents instead of building serially in the main loop
+description: For multi-file/layer implementation tasks in perch, spawn parallel sub-agents instead of building serially in the main loop
 type: feedback
 ---
 
-For non-trivial implementation work in this repo, use an agent team — spawn
+For non-trivial implementation work in this repo (perch), use an agent team — spawn
 parallel sub-agents (`backend-engineer`, `frontend-engineer`, `devops`,
 `e2e-tester`, `code-reviewer`) split along file-disjoint slices.
 

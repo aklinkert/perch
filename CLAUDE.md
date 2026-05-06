@@ -1,4 +1,4 @@
-# work-dashboard — Claude Instructions
+# perch — Claude Instructions
 
 ## Implementation workflow
 

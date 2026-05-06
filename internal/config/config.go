@@ -90,7 +90,7 @@ func (c *Config) applyDefaults() {
 		c.Defaults.PollInterval = 5 * time.Minute
 	}
 	if c.DBPath == "" {
-		c.DBPath = "./data/dashboard.db"
+		c.DBPath = "./data/perch.db"
 	}
 	if c.Listen == "" {
 		c.Listen = ":8080"

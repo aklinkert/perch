@@ -12,12 +12,12 @@ import (
 	"github.com/samber/do/v2"
 	"github.com/urfave/cli/v3"
 
-	"github.com/aklinkert/work-dashboard/internal/cache"
-	"github.com/aklinkert/work-dashboard/internal/config"
-	"github.com/aklinkert/work-dashboard/internal/github"
-	"github.com/aklinkert/work-dashboard/internal/server"
-	"github.com/aklinkert/work-dashboard/internal/views"
-	"github.com/aklinkert/work-dashboard/internal/widget"
+	"github.com/aklinkert/perch/internal/cache"
+	"github.com/aklinkert/perch/internal/config"
+	"github.com/aklinkert/perch/internal/github"
+	"github.com/aklinkert/perch/internal/server"
+	"github.com/aklinkert/perch/internal/views"
+	"github.com/aklinkert/perch/internal/widget"
 )
 
 func main() {

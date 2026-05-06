@@ -1,6 +1,10 @@
-# work-dashboard
+# perch
 
 A self-hosted engineering dashboard that surfaces GitHub (and GitHub Enterprise) activity in real time: open PRs, workflow runs, branch build matrices, and assigned issues — all pushed live to your browser via SSE.
+
+## Why "perch"?
+
+A **perch** is the elevated spot a bird returns to in order to watch the world below — a branch, a ledge, a high post. *perch* is your perch above your repos: you sit in one place and watch PRs and Actions runs flow past underneath. Quiet, observant, bird-of-prey energy. Pairs nicely with GitHub's Octocat (also bird-ish).
 
 ## Quick start (Docker)
 
@@ -28,10 +32,10 @@ make dev          # starts Tailwind watcher + go run in parallel
 Other targets:
 
 ```
-make build    # minify CSS + compile binary → dist/dashboard
+make build    # minify CSS + compile binary → dist/perch
 make test     # go test ./...
 make tidy     # go mod tidy
-make docker   # docker build -t work-dashboard .
+make docker   # docker build -t perch .
 ```
 
 ## Supported widget types
@@ -42,6 +46,7 @@ make docker   # docker build -t work-dashboard .
 | `workflow_status` | Latest N runs of a workflow file |
 | `branch_matrix` | Build-status grid across repos × branches |
 | `my_issues` | Issues assigned to or created by the configured author |
+| `repo_health` | Per-repo summary: open PR count, failing checks, stale-branch days |
 
 ## Architecture
 
