@@ -14,10 +14,10 @@
   </header>
 
   <main hx-ext="sse" sse-connect="/events"
-        class="grid gap-4 p-4 grid-cols-1 md:grid-cols-{{.Columns}}">
+        class="gap-2 p-2 columns-1 md:columns-{{.Columns}}">
     {{range .Widgets}}
     <section id="widget-{{.ID}}"
-             class="rounded-lg border border-gray-800 bg-gray-900 p-4"
+             class="break-inside-avoid mb-2 rounded-lg border border-gray-800 bg-gray-900 p-3"
              sse-swap="widget-{{.ID}}"
              hx-swap="innerHTML">
       {{.InitialHTML}}

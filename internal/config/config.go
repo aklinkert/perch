@@ -43,6 +43,8 @@ type Widget struct {
 	Branch   string        `yaml:"branch"`
 	Workflow string        `yaml:"workflow"`
 	LastN    int           `yaml:"last_n"`
+	ColSpan  int           `yaml:"col_span" validate:"omitempty,min=1,max=6"`
+	RowSpan  int           `yaml:"row_span" validate:"omitempty,min=1,max=6"`
 }
 
 type Layout struct {

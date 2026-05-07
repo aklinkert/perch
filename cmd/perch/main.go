@@ -18,6 +18,12 @@ import (
 	"github.com/aklinkert/perch/internal/server"
 	"github.com/aklinkert/perch/internal/views"
 	"github.com/aklinkert/perch/internal/widget"
+
+	_ "github.com/aklinkert/perch/internal/widget/branchmatrix"
+	_ "github.com/aklinkert/perch/internal/widget/myissues"
+	_ "github.com/aklinkert/perch/internal/widget/prlist"
+	_ "github.com/aklinkert/perch/internal/widget/repohealth"
+	_ "github.com/aklinkert/perch/internal/widget/workflowstatus"
 )
 
 func main() {

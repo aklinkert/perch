@@ -16,6 +16,8 @@ import (
 type layoutWidget struct {
 	ID          string
 	InitialHTML template.HTML
+	ColSpan     int
+	RowSpan     int
 }
 
 type layoutData struct {
@@ -59,10 +61,15 @@ func (s *Server) handleIndex(c *fiber.Ctx) error {
 			s.logger.Warn("initial render failed", "id", w.ID(), "error", err)
 			buf.WriteString(fmt.Sprintf(`<div class="text-sm text-gray-500">loading %s…</div>`, template.HTMLEscapeString(w.Title())))
 		}
-		data.Widgets = append(data.Widgets, layoutWidget{
+		lw := layoutWidget{
 			ID:          w.ID(),
 			InitialHTML: template.HTML(buf.String()),
-		})
+		}
+		if cw := s.cfg.WidgetByID(w.ID()); cw != nil {
+			lw.ColSpan = cw.ColSpan
+			lw.RowSpan = cw.RowSpan
+		}
+		data.Widgets = append(data.Widgets, lw)
 	}
 
 	var out bytes.Buffer

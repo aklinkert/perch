@@ -18,6 +18,21 @@ docker compose up
 
 Open http://localhost:8080.
 
+`config.yaml` is gitignored — your instances, repos, and token env-var
+references stay local. Commit changes via `config.example.yaml` only.
+
+### Local overrides
+
+Need to inject extra environment variables (e.g. additional GHE instance
+tokens) without editing the committed `docker-compose.yml`?
+
+```bash
+cp docker-compose.override.yml.example docker-compose.override.yml
+# add any extra ${VAR}: ${VAR:-} passthroughs
+```
+
+`docker-compose.override.yml` is gitignored and auto-merged by Compose.
+
 ## Local development
 
 Requires Go 1.23+, Node 18+ (for Tailwind CLI).

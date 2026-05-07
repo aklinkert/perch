@@ -1,0 +1,11 @@
+# Local overrides — copy to docker-compose.override.yml (gitignored)
+# Compose auto-merges this on top of docker-compose.yml.
+#
+# Use to inject extra GitHub Enterprise tokens for instances declared in
+# config.yaml that aren't part of the public defaults.
+
+services:
+  perch:
+    environment:
+      # Example: extra GHE instance token used by config.yaml (${MY_GHE_TOKEN})
+      MY_GHE_TOKEN: ${MY_GHE_TOKEN:-}

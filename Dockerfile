@@ -14,10 +14,12 @@ RUN npm init -y && \
     npx tailwindcss -i web/tailwind.css -o web/static/app.css --minify
 
 # Stage 2: Build Go binary
-FROM golang:1.23-alpine AS build
+FROM golang:1.26-bookworm AS build
 
-# CGO is required for SQLite (go-sqlite3)
-RUN apk add --no-cache build-base sqlite-dev
+# CGO is required for SQLite (go-sqlite3); glibc base matches distroless/cc runtime.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential libsqlite3-dev \
+ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -34,10 +36,14 @@ RUN CGO_ENABLED=1 go build \
     -o /out/perch \
     ./cmd/perch
 
+# Pre-create /data with nonroot ownership so the named volume inherits perms.
+RUN mkdir -p /out/data && chown 65532:65532 /out/data
+
 # Stage 3: Runtime — distroless/cc for CGO (glibc-compatible)
 FROM gcr.io/distroless/cc-debian12:nonroot
 
 COPY --from=build /out/perch /perch
+COPY --from=build --chown=nonroot:nonroot /out/data /data
 
 EXPOSE 8080
 

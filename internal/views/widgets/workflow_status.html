@@ -1,5 +1,5 @@
 {{define "workflow_status.html"}}
-<div class="flex items-center justify-between mb-3">
+<div class="flex items-center justify-between mb-2">
   <h2 class="font-semibold">{{.Title}}</h2>
   <span class="text-xs text-gray-500">{{.Updated}}</span>
 </div>
@@ -8,7 +8,7 @@
 {{else if not .Items}}
 <div class="text-sm text-gray-500">no runs</div>
 {{else}}
-<ul class="space-y-2">
+<ul class="space-y-1">
   {{range .Items}}
   <li class="flex items-center gap-2 text-sm">
     <span class="inline-block w-2 h-2 rounded-full

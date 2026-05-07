@@ -1,5 +1,5 @@
 {{define "repo_health.html"}}
-<div class="flex items-center justify-between mb-3">
+<div class="flex items-center justify-between mb-2">
   <h2 class="font-semibold">{{.Title}}</h2>
   <span class="text-xs text-gray-500">{{.Updated}}</span>
 </div>
@@ -9,7 +9,7 @@
 {{if not .Items}}
 <div class="text-sm text-gray-500">no repos</div>
 {{else}}
-<ul class="space-y-2">
+<ul class="space-y-1">
   {{range .Items}}
   <li class="flex items-center gap-2 text-sm">
     <a href="{{.URL}}" target="_blank" class="font-mono hover:underline flex-1 min-w-0 truncate">{{.Repo}}</a>
