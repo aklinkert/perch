@@ -8,6 +8,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 
+	"github.com/aklinkert/perch/internal/cache"
 	"github.com/aklinkert/perch/internal/config"
 	"github.com/aklinkert/perch/internal/widget"
 )
@@ -21,11 +22,12 @@ type Server struct {
 	bcast   *widget.Broadcaster
 	widgets []widget.Widget
 	byID    map[string]widget.Widget
+	store   *cache.Store
 	logger  *slog.Logger
 }
 
 // New constructs the server, registers routes, and returns it ready to Listen.
-func New(cfg *config.Config, tmpl *template.Template, bcast *widget.Broadcaster, widgets []widget.Widget) *Server {
+func New(cfg *config.Config, tmpl *template.Template, bcast *widget.Broadcaster, widgets []widget.Widget, store *cache.Store) *Server {
 	app := fiber.New(fiber.Config{
 		AppName:               "perch",
 		DisableStartupMessage: true,
@@ -47,6 +49,7 @@ func New(cfg *config.Config, tmpl *template.Template, bcast *widget.Broadcaster,
 		bcast:   bcast,
 		widgets: widgets,
 		byID:    byID,
+		store:   store,
 		logger:  slog.Default().With("component", "server"),
 	}
 	s.registerRoutes()

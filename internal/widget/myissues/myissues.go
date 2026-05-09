@@ -142,9 +142,13 @@ func (w *Widget) Refresh(ctx context.Context) error {
 		return w.fail(fmt.Errorf("instance %q not found", w.cfg.Instance), now)
 	}
 	q := buildSearchQuery(w.cfg)
+	n := w.cfg.LastN
+	if n <= 0 {
+		n = 30
+	}
 	vars := map[string]any{
 		"q": githubv4.String(q),
-		"n": githubv4.Int(30),
+		"n": githubv4.Int(n),
 	}
 	var resp issueSearchQuery
 	if err := c.GQL.Query(ctx, &resp, vars); err != nil {

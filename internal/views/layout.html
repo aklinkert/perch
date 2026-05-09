@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/static/app.css">
   <script src="/static/htmx.min.js"></script>
   <script src="/static/sse.js"></script>
+  <script src="/static/sortable.min.js"></script>
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen">
   <header class="border-b border-gray-800 px-4 py-3 flex items-center justify-between">
@@ -14,15 +15,66 @@
   </header>
 
   <main hx-ext="sse" sse-connect="/events"
-        class="gap-2 p-2 columns-1 md:columns-{{.Columns}}">
-    {{range .Widgets}}
-    <section id="widget-{{.ID}}"
-             class="break-inside-avoid mb-2 rounded-lg border border-gray-800 bg-gray-900 p-3"
+        class="grid gap-2 p-2 grid-cols-1 md:grid-cols-{{.Columns}} items-start">
+    {{range .Cols}}
+    <div class="flex flex-col gap-2 perch-col min-h-[2rem]">
+      {{range .}}
+      <section data-widget-id="{{.ID}}"
+               class="rounded-lg border border-gray-800 bg-gray-900 p-3">
+        <div class="perch-handle cursor-move text-xs text-gray-600 select-none mb-1">⋮⋮ drag</div>
+        <div id="widget-{{.ID}}"
              sse-swap="widget-{{.ID}}"
              hx-swap="innerHTML">
-      {{.InitialHTML}}
-    </section>
+          {{.InitialHTML}}
+        </div>
+      </section>
+      {{end}}
+    </div>
     {{end}}
   </main>
+
+  <script>
+    (function () {
+      var status = document.getElementById('conn-status');
+      if (!status) return;
+      function set(text, cls) {
+        status.textContent = text;
+        status.className = 'text-xs ' + cls;
+      }
+      document.body.addEventListener('htmx:sseOpen', function () {
+        set('connected', 'text-green-500');
+      });
+      document.body.addEventListener('htmx:sseError', function () {
+        set('disconnected — retrying…', 'text-red-400');
+      });
+    })();
+
+    (function () {
+      if (typeof Sortable === 'undefined') return;
+      var cols = document.querySelectorAll('.perch-col');
+      function snapshot() {
+        return Array.from(cols).map(function (col) {
+          return Array.from(col.querySelectorAll('section[data-widget-id]'))
+            .map(function (el) { return el.dataset.widgetId; });
+        });
+      }
+      function persist() {
+        fetch('/layout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cols: snapshot() }),
+        }).catch(function () { /* ignore — best-effort */ });
+      }
+      cols.forEach(function (col) {
+        new Sortable(col, {
+          group: 'perch-widgets',
+          handle: '.perch-handle',
+          animation: 150,
+          ghostClass: 'opacity-40',
+          onEnd: persist,
+        });
+      });
+    })();
+  </script>
 </body>
 </html>{{end}}

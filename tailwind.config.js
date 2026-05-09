@@ -5,8 +5,9 @@ module.exports = {
     './internal/views/**/*.html',
   ],
   safelist: [
-    { pattern: /^columns-[1-6]$/, variants: ['md'] },
-    'break-inside-avoid',
+    { pattern: /^grid-cols-[1-6]$/, variants: ['md'] },
+    'text-green-500',
+    'text-red-400',
   ],
   theme: {
     extend: {},

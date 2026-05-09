@@ -106,7 +106,7 @@ func runDashboard(parent context.Context, configPath string) error {
 		widgets = append(widgets, w)
 	}
 
-	srv := server.New(cfg, tmpl, bcast, widgets)
+	srv := server.New(cfg, tmpl, bcast, widgets, store)
 
 	// DI container — registered for downstream consumers / tests.
 	injector := do.New()
