@@ -26,6 +26,9 @@ jobs:
       contents: write
     outputs:
       tag: ${{ steps.tag.outputs.new_tag || steps.head.outputs.tag }}
+      # 'true' only when this run pushed a new tag; a re-run on an already
+      # tagged HEAD republishes that version but must not move latest.
+      created: ${{ steps.tag.outputs.new_tag != '' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -106,7 +109,7 @@ jobs:
           images: ghcr.io/${{ github.repository }}
           tags: |
             type=semver,pattern={{version}},value=${{ needs.release.outputs.tag }}
-            type=raw,value=latest
+            type=raw,value=latest,enable=${{ needs.release.outputs.created == 'true' }}
       - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
         with:
           context: .
