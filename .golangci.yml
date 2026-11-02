@@ -1,0 +1,6 @@
+version: "2"
+
+# Default linters; additionally fail on gofmt drift.
+formatters:
+  enable:
+    - gofmt
