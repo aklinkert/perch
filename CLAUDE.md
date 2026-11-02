@@ -21,7 +21,7 @@ without conflicting.
 ## Directory layout
 
 ```
-cmd/dashboard/         entrypoint (urfave/cli/v3)
+cmd/perch/             entrypoint (urfave/cli/v3)
 internal/config/       YAML loader + validator
 internal/cache/        gorm models, ETag store
 internal/github/       multi-instance clients, ETag transport, rate limiter
