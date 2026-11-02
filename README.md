@@ -1,5 +1,7 @@
 # perch
 
+[![test](https://github.com/aklinkert/perch/actions/workflows/test.yml/badge.svg)](https://github.com/aklinkert/perch/actions/workflows/test.yml)
+
 A self-hosted, real-time engineering dashboard for one developer juggling
 **multiple GitHub instances** (e.g. github.com + a corporate GitHub
 Enterprise). Surfaces open PRs, workflow runs, branch build matrices, and
@@ -54,6 +56,25 @@ open http://localhost:8080
 
 `config.yaml` is gitignored — your instances, repos, and token env-var
 references stay local. Commit changes via `config.example.yaml` only.
+
+### Prebuilt image
+
+Every release publishes a multi-arch (`linux/amd64`, `linux/arm64`) image to
+GitHub Container Registry, tagged with the release version and `latest`:
+
+```bash
+docker pull ghcr.io/aklinkert/perch:latest
+```
+
+To run it instead of building locally, set the image in
+`docker-compose.override.yml` and start without `--build`:
+
+```yaml
+services:
+  perch:
+    image: ghcr.io/aklinkert/perch:latest
+    pull_policy: always
+```
 
 ## Configuration
 
@@ -192,7 +213,7 @@ listen ports, custom volume bindings, etc.
 
 ## Local development
 
-Requires Go 1.26+, Node 18+ (for the Tailwind CLI), and SQLite headers
+Requires Go 1.27+, Node 18+ (for the Tailwind CLI), and SQLite headers
 (macOS: built-in; Linux: `apt install libsqlite3-dev`).
 
 ```bash
@@ -259,7 +280,7 @@ web/                   tailwind input + built static assets (embedded)
 
 ### Stack
 
-- Go 1.26, [Fiber v2](https://github.com/gofiber/fiber)
+- Go 1.27, [Fiber v2](https://github.com/gofiber/fiber)
 - `html/template` (stdlib) + `embed.FS` for SSR
 - HTMX 2.x + [SortableJS](https://github.com/SortableJS/Sortable) for
   drag-and-drop, Tailwind CSS for styling
