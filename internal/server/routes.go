@@ -83,7 +83,7 @@ func (s *Server) handleIndex(c *fiber.Ctx) error {
 		var buf bytes.Buffer
 		if err := w.Render(&buf); err != nil {
 			s.logger.Warn("initial render failed", "id", w.ID(), "error", err)
-			buf.WriteString(fmt.Sprintf(`<div class="text-sm text-gray-500">loading %s…</div>`, template.HTMLEscapeString(w.Title())))
+			fmt.Fprintf(&buf, `<div class="text-sm text-gray-500">loading %s…</div>`, template.HTMLEscapeString(w.Title()))
 		}
 		lw := layoutWidget{
 			ID:          w.ID(),

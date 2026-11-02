@@ -85,14 +85,14 @@ func (w *Widget) Render(out io.Writer) error {
 // repoQuery is one repo's slice of the batched GraphQL query. We assemble the
 // final query manually because alias names need to be unique per repo.
 type repoQuery struct {
-	URL       githubv4.URI
+	URL          githubv4.URI
 	PullRequests struct {
 		TotalCount int
 	} `graphql:"pullRequests(states: OPEN)"`
 	DefaultBranchRef *struct {
 		Target struct {
 			Commit struct {
-				CommittedDate time.Time
+				CommittedDate     time.Time
 				StatusCheckRollup *struct {
 					State string
 				}

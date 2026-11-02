@@ -34,7 +34,7 @@ func (t *etagTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 		return nil, err
 	}
 	if resp.StatusCode == http.StatusNotModified && cached != nil {
-		resp.Body.Close()
+		_ = resp.Body.Close()
 		resp.StatusCode = http.StatusOK
 		resp.Status = "200 OK (cached)"
 		resp.Body = io.NopCloser(bytes.NewReader(cached.Body))
@@ -43,7 +43,7 @@ func (t *etagTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	}
 	if resp.StatusCode == http.StatusOK {
 		body, rerr := io.ReadAll(resp.Body)
-		resp.Body.Close()
+		_ = resp.Body.Close()
 		if rerr == nil {
 			etag := resp.Header.Get("ETag")
 			if etag != "" {
